@@ -1,0 +1,98 @@
+{
+  "info": {
+    "name": "Hospital Management API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000" },
+    { "key": "hospitalId", "value": "PUT_HOSPITAL_ID_HERE" }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/health" }
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register Admin",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin1\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"admin\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/register"
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"admin1\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": "{{baseUrl}}/api/auth/login"
+          }
+        },
+        {
+          "name": "Current User",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/auth/me" }
+        },
+        {
+          "name": "Logout",
+          "request": { "method": "POST", "url": "{{baseUrl}}/api/auth/logout" }
+        }
+      ]
+    },
+    {
+      "name": "Hospitals",
+      "item": [
+        {
+          "name": "Get All Hospitals",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/hospitals" }
+        },
+        {
+          "name": "Get Available Hospitals",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/hospitals/available" }
+        },
+        {
+          "name": "Get Hospital By ID",
+          "request": { "method": "GET", "url": "{{baseUrl}}/api/hospitals/{{hospitalId}}" }
+        },
+        {
+          "name": "Create Hospital",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"City General Hospital\",\n  \"address\": \"12 Main Road\",\n  \"city\": \"Bengaluru\",\n  \"phone\": \"+91-9876543210\",\n  \"totalBeds\": 250,\n  \"availableBeds\": 35,\n  \"specialties\": [\"Cardiology\", \"Neurology\", \"Emergency\"]\n}"
+            },
+            "url": "{{baseUrl}}/api/hospitals"
+          }
+        },
+        {
+          "name": "Update Hospital",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"availableBeds\": 50\n}"
+            },
+            "url": "{{baseUrl}}/api/hospitals/{{hospitalId}}"
+          }
+        },
+        {
+          "name": "Delete Hospital",
+          "request": { "method": "DELETE", "url": "{{baseUrl}}/api/hospitals/{{hospitalId}}" }
+        }
+      ]
+    }
+  ]
+}
